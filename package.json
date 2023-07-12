@@ -3,7 +3,7 @@
   "version": "0.0.4",
   "description": "API for communicating with Baby Connect",
   "main": "src/baby_connect.js",
-  "repository": "https://github.com/mroch/baby-connect",
+  "repository": "https://github.com/boldbigflank/baby-connect",
   "author": "Marshall Roch <marshall@mroch.com>",
   "license": "BSD-3-Clause",
   "dependencies": {
