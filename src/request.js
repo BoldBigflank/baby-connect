@@ -7,7 +7,7 @@ const https = require('https');
 const moment = require('moment');
 const querystring = require('querystring');
 
-const HOSTNAME = 'www.baby-connect.com';
+const HOSTNAME = 'app.babyconnect.com';
 const LANGUAGE = 'en';
 
 class Request {
