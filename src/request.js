@@ -40,6 +40,39 @@ class Request {
   //   "e":"3/11/2017 16:15","Ptm":0
   // }]
   // &waccount2=1
+
+  getKidSummary(kidId) {
+    const time = new Date();
+    const dateStr = moment(time).format('YYMMDD');
+    const dateMs = new Date()
+    const data = '';
+    const qs = querystring.stringify({
+      pdt: dateStr,
+      cmd: "StatusList",
+      fmt: "long",
+      _ts_: dateMs,
+      tzo: "-300:1",
+      Kid: kidId,
+      // past: 1
+
+      // lg: LANGUAGE,
+      // v: '2',
+      // withDisable: 'true', // what does this mean?
+      // // pdt: TODO: YYMMDD, but is this necessary?
+    });
+    return this.rawPost(`/CmdListI?${qs}`, data);
+  }
+
+  /* 
+    pdt=230712
+    &fmt=long
+    &_ts_=1689180632688
+    &tzo=-300%3B1
+    &Kid=6445520921165824
+    &__srf_token__=TjBwTWRGM1k7jDFk
+  */
+
+
   saveStatus(user, kid, category, text, time) {
     const dateStr = moment(time).format('YYMMDD');
     const timeStr = moment(time).format('HHmm');
@@ -91,6 +124,7 @@ class Request {
       };
 
       const req = https.request(options, (res) => {
+        console.log('status', res.statusCode)
         if (res.statusCode !== 200) {
           reject(new Error(res));
           return;
@@ -102,11 +136,13 @@ class Request {
           body.push(chunk);
         });
         res.on('end', () => {
+          console.log('req end')
           resolve(JSON.parse(body.join('')));
         });
       });
 
       req.on('error', (e) => {
+        console.log('req error')
         reject(e);
       });
 
