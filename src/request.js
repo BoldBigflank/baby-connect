@@ -42,9 +42,8 @@ class Request {
   // &waccount2=1
 
   getKidSummary(kidId) {
-    const time = new Date();
-    const dateStr = moment(time).format('YYMMDD');
-    const dateMs = new Date()
+    const dateMs = new Date(Date.now() - 5 * 60 * 60 * 1000); // Chicago time zone
+    const dateStr = moment(dateMs).format('YYMMDD');
     const data = '';
     const qs = querystring.stringify({
       pdt: dateStr,
